@@ -9,9 +9,12 @@
 
 <p align="center"><em>highly configurable, framework-agnostic static site generation for SPAs</em></p>
 
+**:tada: `prerender-spa-plugin` v3 is now in beta! It replaces PhantomJS 
+with Puppeteer and adds a few new features. Go [take a look!](https://github.com/chrisvfritz/prerender-spa-plugin/tree/v3). It can be installed from npm with `npm install prerender-spa-plugin@next`**
+
 ## Prerendering vs Server-Side Rendering (SSR)
 
-SSR is, like, _super_ hot right now. Personally though, I think it's overrated. It can significantly increase the complexity of your application and for many use cases, prerendering is a simpler and more appropriate solution. These are the top 2 problems people are typically trying to solve with either of these strategies:
+SSR is, like, _super_ hot right now. Personally though, I think it's overrated. It can significantly increase the complexity of your application and for many use cases, prerendering is a simpler and more appropriate solution. These are the top 3 problems people are typically trying to solve with either of these strategies:
 
 1. __SEO__: When content is loaded asynchronously, crawlers won't wait for it to be loaded.
 2. __Slow clients__: When users are accessing your site on a bad Internet connection, you want to be able to show them content as soon as possible, even before all your JS is downloaded and parsed.
@@ -166,7 +169,7 @@ module.exports = {
 
 ### Code Splitting
 
-If you're using [code splitting](https://webpack.github.io/docs/code-splitting.html), visits to some prerendered pages [might throw](https://github.com/chrisvfritz/prerender-spa-plugin/issues/9): `Uncaught ReferenceError: webpackJsonp is not defined`. That just means some asynchronous chunks that Webpack injects into `<head>` are being evaluated before your main scripts, often in `<body>`.
+If you're using [code splitting](https://webpack.js.org/guides/code-splitting/), visits to some prerendered pages [might throw](https://github.com/chrisvfritz/prerender-spa-plugin/issues/9): `Uncaught ReferenceError: webpackJsonp is not defined`. That just means some asynchronous chunks that Webpack injects into `<head>` are being evaluated before your main scripts, often in `<body>`.
 
 If you're using `html-webpack-plugin`, you can resolve this by also injecting your main scripts into `<head>` with these options:
 
@@ -227,6 +230,15 @@ npm rebuild
 
 
 <br>
+
+---
+
+## Alternatives
+
+- [react-snap](https://github.com/stereobooster/react-snap) - Zero-configuration framework-agnostic prerendering. Does not depend on webpack. Handles a variety of edge-cases.
+- [snapshotify](https://github.com/errorception/snapshotify) - An experimental prerenderer that performes a number of speed optimizations.
+- [presite](https://github.com/egoist/presite) - Minimal-configuration framework-agnostic prerendering.
+- [prerenderer](https://github.com/tribex/prerenderer) - Pluggable prerendering library that [prerender-spa-plugin v3+](https://github.com/chrisvfritz/prerender-spa-plugin/tree/v3) is based on.
 
 ---
 
